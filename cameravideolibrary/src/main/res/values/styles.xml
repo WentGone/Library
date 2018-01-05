@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ToolbarTheme" parent="Theme.AppCompat.Light">
+        <!-- 设置 显示在toobar上菜单文字的颜色 -->
+        <item name="actionMenuTextColor">#333333</item>
+    </style>
+</resources>

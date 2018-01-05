@@ -1,0 +1,2 @@
+include ':app', ':cameravideolibrary', ':baselibrary', ':pickphotovideoview'/*, ':pickphotoview', ':library'*/
+/*include ':app', ':cameravideolibrary', ':gsyVideoPlayer-java', ':gsyVideoPlayer', ':pickphotoview'*/
