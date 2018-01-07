@@ -1,4 +1,4 @@
-package cn.mdruby.pickphotovideoview;
+package cn.mdruby.pickphotovideoview.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+
+import cn.mdruby.pickphotovideoview.MediaModel;
+import cn.mdruby.pickphotovideoview.R;
+import cn.mdruby.pickphotovideoview.abstracts.OnItemPhotoClickListener;
 
 /**
  * Created by Went_Gone on 2018/1/5.
@@ -46,6 +50,7 @@ public class RVPhotoGridAdapter extends RecyclerView.Adapter {
         RecyclerView.ViewHolder viewHolder = null;
         switch (viewType){
             case CAMERA_VIEW_TYPE:
+                viewHolder = new RVCameraViewHolder(LayoutInflater.from(context).inflate(R.layout.item_pick_camera_layout,parent,false));
                 break;
             case PHOTO_VIEW_TYPE:
                 viewHolder = new RVPhotoGridViewHolder(LayoutInflater.from(context).inflate(R.layout.item_photo_grid_layout,parent,false));
@@ -58,6 +63,8 @@ public class RVPhotoGridAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof RVPhotoGridViewHolder){
             ((RVPhotoGridViewHolder) holder).bindView(position);
+        }else if (holder instanceof RVCameraViewHolder){
+            ((RVCameraViewHolder) holder).bindView(position);
         }
     }
 
@@ -67,6 +74,27 @@ public class RVPhotoGridAdapter extends RecyclerView.Adapter {
 //        return 10;
     }
 
+    private class RVCameraViewHolder extends RecyclerView.ViewHolder{
+        private View mViewRoot;
+
+        public RVCameraViewHolder(View itemView) {
+            super(itemView);
+            mViewRoot = itemView.findViewById(R.id.item_pick_camera_layout_root);
+        }
+
+        void bindView(int position){
+            mViewRoot.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onItemPhotoClickListener != null){
+                        onItemPhotoClickListener.onCameraClick();
+                    }
+                }
+            });
+        }
+    }
+
+
     private class RVPhotoGridViewHolder extends RecyclerView.ViewHolder{
         private ImageView mIV;
 
@@ -75,9 +103,23 @@ public class RVPhotoGridAdapter extends RecyclerView.Adapter {
             mIV = itemView.findViewById(R.id.item_photo_grid_layout_IV);
         }
 
-        private void bindView(int position){
+        private void bindView(final int position){
             MediaModel bean = mDatas.get(showCamera ? position - 1 : position);
             Glide.with(context).load(bean.getThumPath()).into(mIV);
+            mIV.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onItemPhotoClickListener != null){
+                        onItemPhotoClickListener.onPhotoClick(position);
+                    }
+                }
+            });
         }
+    }
+
+    private OnItemPhotoClickListener onItemPhotoClickListener;
+
+    public void setOnItemPhotoClickListener(OnItemPhotoClickListener onItemPhotoClickListener) {
+        this.onItemPhotoClickListener = onItemPhotoClickListener;
     }
 }

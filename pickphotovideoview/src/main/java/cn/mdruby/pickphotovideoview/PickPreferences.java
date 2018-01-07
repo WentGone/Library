@@ -68,7 +68,7 @@ public class PickPreferences {
         return result;
     }
 
-   /* public DirImage getDirImage(){
+    public DirImage getDirImage(){
         if(dirImage == null) {
             String ss = mSharedPreferences.getString(DIR_NAMES, "");
             if(TextUtils.isEmpty(ss)) {
@@ -78,7 +78,7 @@ public class PickPreferences {
             }
         }
         return dirImage;
-    }*/
+    }
 
     public boolean savePickData(PickData data){
         pickData = data;

@@ -44,13 +44,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="你好呀"
             android:layout_gravity="start"
-            android:background="#333333"
-            android:textColor="#ffffff"/>
+            android:background="#333333">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/act_pick_photo_list_RV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>

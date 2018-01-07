@@ -7,7 +7,6 @@ package cn.mdruby.pickphotovideoview;
  */
 
 public class PickConfig {
-
     // TAG
     public static final String TAG = "PickPhotoView";
     // intent data
@@ -47,4 +46,11 @@ public class PickConfig {
 //    public static final int PICK_WHITE_COLOR = R.color.pick_white;
 
     public static final String MEIDA_PREVIEW_MODEL = "intent_pre_view_model";
+
+    public static class RrquestCode{
+        /**
+         * 拍照(自定义相机)
+         */
+        public static final int TAKE_PHOTO_BY_SELF = 0x6756;
+    }
 }

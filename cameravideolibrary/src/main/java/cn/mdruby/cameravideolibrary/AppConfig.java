@@ -6,4 +6,5 @@ package cn.mdruby.cameravideolibrary;
 
 public class AppConfig {
     public static final String MP4 = ".mp4";
+    public static final int TAKE_PHOTO_SRC = 0x789;
 }

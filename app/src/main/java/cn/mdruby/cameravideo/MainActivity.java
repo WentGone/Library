@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         mBtnClick = (Button) findViewById(R.id.act_main_Btn);
 //        Observable<String>
 //        startActivity(new Intent(this, PickPhotoActivity.class));
-        new PickPhotoView.Bulid(this).start();
+        new PickPhotoView.Bulid(this).showCamera(true).start();
 
         subscriber = new Subscriber<String>() {
             @Override

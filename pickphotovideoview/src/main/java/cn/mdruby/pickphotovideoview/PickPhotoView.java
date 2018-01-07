@@ -29,11 +29,13 @@ public class PickPhotoView {
         private Context context;
 
         public Bulid(Context context) {
+            pickData = new PickData();
             this.context = context;
         }
 
-        public void showCamera(boolean showCamera){
+        public Bulid showCamera(boolean showCamera){
             pickData.setShowCamera(showCamera);
+            return this;
         }
 
         private PickPhotoView create(){

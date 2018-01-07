@@ -415,6 +415,7 @@ public class CameraVideoActivity extends AppCompatActivity implements SurfaceHol
                     saveBitmap = Bitmap.createBitmap(saveBitmap, 0, animHeight + SystemUtils.dp2px(context, 44), screenWidth, screenWidth);
                 } else {
                     //正方形 animHeight(动画高度)
+//                    saveBitmap = Bitmap.createBitmap(saveBitmap, 0, 0, screenWidth, screenWidth * 4/3);
                     saveBitmap = Bitmap.createBitmap(saveBitmap, 0, 0, screenWidth, screenWidth * 4/3);
                 }
 
@@ -435,12 +436,14 @@ public class CameraVideoActivity extends AppCompatActivity implements SurfaceHol
                 intent.putExtra(AppConstant.KEY.IMG_PATH, img_path);
                 intent.putExtra(AppConstant.KEY.PIC_WIDTH, screenWidth);
                 intent.putExtra(AppConstant.KEY.PIC_HEIGHT, picHeight);
-                Toast.makeText(context, "=="+img_path, Toast.LENGTH_SHORT).show();
-                RequestOptions options = new RequestOptions();
+                setResult(RESULT_OK,intent);
+                CameraVideoActivity.this.finish();
+//                Toast.makeText(context, "=="+img_path, Toast.LENGTH_SHORT).show();
+                /*RequestOptions options = new RequestOptions();
                 options.transform(new CircleCrop());
                 Glide.with(context).load(img_path)
                         .apply(options)
-                        .into(mIVShowPhoto);
+                        .into(mIVShowPhoto);*/
             }
         });
     }
