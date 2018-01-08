@@ -25,6 +25,7 @@ public class RVPhotoGridAdapter extends RecyclerView.Adapter {
     private boolean showCamera;
     private static final int CAMERA_VIEW_TYPE = 1;
     private static final int PHOTO_VIEW_TYPE = 2;
+    private static final int VIDEO_VIEW_TYPE = 3;
 
     public RVPhotoGridAdapter(Context context, List<MediaModel> mDatas, boolean showCamera) {
         this.context = context;
@@ -38,10 +39,19 @@ public class RVPhotoGridAdapter extends RecyclerView.Adapter {
             if (position == 0){
                 return CAMERA_VIEW_TYPE;
             }else {
-                return PHOTO_VIEW_TYPE;
+                if (mDatas.get(position).getMimeType().contains("video")){
+                    return VIDEO_VIEW_TYPE;
+                }else {
+                    return PHOTO_VIEW_TYPE;
+                }
             }
         }else {
-            return PHOTO_VIEW_TYPE;
+//            return PHOTO_VIEW_TYPE;
+            if (mDatas.get(position).getMimeType().contains("video")){
+                return VIDEO_VIEW_TYPE;
+            }else {
+                return PHOTO_VIEW_TYPE;
+            }
         }
     }
 
@@ -55,6 +65,8 @@ public class RVPhotoGridAdapter extends RecyclerView.Adapter {
             case PHOTO_VIEW_TYPE:
                 viewHolder = new RVPhotoGridViewHolder(LayoutInflater.from(context).inflate(R.layout.item_photo_grid_layout,parent,false));
                 break;
+            case VIDEO_VIEW_TYPE:
+                viewHolder = new RVVideoGridViewHolder(LayoutInflater.from(context).inflate(R.layout.item_video_grid_layout,parent,false));
         }
         return viewHolder;
     }
@@ -65,6 +77,8 @@ public class RVPhotoGridAdapter extends RecyclerView.Adapter {
             ((RVPhotoGridViewHolder) holder).bindView(position);
         }else if (holder instanceof RVCameraViewHolder){
             ((RVCameraViewHolder) holder).bindView(position);
+        }else if (holder instanceof RVVideoGridViewHolder){
+            ((RVVideoGridViewHolder) holder).bindView(position);
         }
     }
 
@@ -110,7 +124,28 @@ public class RVPhotoGridAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     if (onItemPhotoClickListener != null){
-                        onItemPhotoClickListener.onPhotoClick(position);
+                        onItemPhotoClickListener.onPhotoClick(showCamera ? position - 1 : position);
+                    }
+                }
+            });
+        }
+    }
+    private class RVVideoGridViewHolder extends RecyclerView.ViewHolder{
+        private ImageView mIV;
+
+        public RVVideoGridViewHolder(View itemView) {
+            super(itemView);
+            mIV = itemView.findViewById(R.id.item_photo_grid_layout_IV);
+        }
+
+        private void bindView(final int position){
+            MediaModel bean = mDatas.get(showCamera ? position - 1 : position);
+            Glide.with(context).load(bean.getThumPath()).into(mIV);
+            mIV.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onItemPhotoClickListener != null){
+                        onItemPhotoClickListener.onVideoClick(position);
                     }
                 }
             });

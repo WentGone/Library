@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import cn.mdruby.pickphotovideoview.activity.PickPhotoActivity;
+
 /**
  * Created by Went_Gone on 2018/1/5.
  */

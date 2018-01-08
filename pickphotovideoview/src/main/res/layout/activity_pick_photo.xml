@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="cn.mdruby.pickphotovideoview.PickPhotoActivity">
+    tools:context="cn.mdruby.pickphotovideoview.activity.PickPhotoActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/act_TypeDetail_Toolbar"
         android:layout_width="match_parent"
@@ -25,11 +25,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#333"
-        app:navigationIcon="@mipmap/menu"
         android:minHeight="?attr/actionBarSize"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
         <TextView
+            android:id="@+id/act_pick_TV_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -37,6 +37,7 @@
             android:textColor="@android:color/white"/>
     </android.support.v7.widget.Toolbar>
     <android.support.v4.widget.DrawerLayout
+        android:id="@+id/act_pick_DrawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <android.support.v7.widget.RecyclerView

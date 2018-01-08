@@ -1,15 +1,11 @@
 package cn.mdruby.cameravideo;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.Observer;
-
-import cn.mdruby.pickphotovideoview.PickPhotoActivity;
 import cn.mdruby.pickphotovideoview.PickPhotoView;
 import rx.Observable;
 import rx.Subscriber;

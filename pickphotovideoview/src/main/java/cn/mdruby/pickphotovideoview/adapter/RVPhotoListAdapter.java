@@ -17,6 +17,7 @@ import java.util.List;
 import cn.mdruby.pickphotovideoview.DirImage;
 import cn.mdruby.pickphotovideoview.GroupMedia;
 import cn.mdruby.pickphotovideoview.MediaModel;
+import cn.mdruby.pickphotovideoview.OnRVItemClickListener;
 import cn.mdruby.pickphotovideoview.PickPreferences;
 import cn.mdruby.pickphotovideoview.R;
 import cn.mdruby.pickphotovideoview.abstracts.OnRVListClickListener;
@@ -57,6 +58,15 @@ public class RVPhotoListAdapter extends RecyclerView.Adapter {
         }
     }
 
+    public List<MediaModel> getItem(int position){
+        String dirName = dirImage.dirName.get(position);
+        return groupImage.getGroupMedias().get(dirName);
+    }
+
+    public String getDirName(int position){
+        return dirImage.dirName.get(position);
+    }
+
     private class RVPhotoListViewHolder extends RecyclerView.ViewHolder{
         private ImageView mIV;
         private TextView mTV;
@@ -86,7 +96,7 @@ public class RVPhotoListAdapter extends RecyclerView.Adapter {
             });
         }
     }
-    private OnRVListClickListener onRVListClickListener;
+    private OnRVItemClickListener onRVListClickListener;
 
     public void setOnRVListClickListener(OnRVListClickListener onRVListClickListener) {
         this.onRVListClickListener = onRVListClickListener;
