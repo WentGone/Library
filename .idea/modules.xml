@@ -7,6 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/baselibrary/baselibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/cameravideolibrary/cameravideolibrary.iml" filepath="$PROJECT_DIR$/cameravideolibrary/cameravideolibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/giraffeplayer/giraffeplayer.iml" filepath="$PROJECT_DIR$/giraffeplayer/giraffeplayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ijkplayer-java/ijkplayer-java.iml" filepath="$PROJECT_DIR$/ijkplayer-java/ijkplayer-java.iml" />
       <module fileurl="file://$PROJECT_DIR$/pickphotovideoview/pickphotovideoview.iml" filepath="$PROJECT_DIR$/pickphotovideoview/pickphotovideoview.iml" />
     </modules>
   </component>

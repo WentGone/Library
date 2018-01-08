@@ -21,5 +21,8 @@
         android:layout_height="wrap_content"
         android:text="点击"
         android:id="@+id/act_main_Btn"/>
-
+    <include
+        layout="@layout/giraffe_player"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

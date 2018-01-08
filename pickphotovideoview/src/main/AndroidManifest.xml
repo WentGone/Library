@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.mdruby.pickphotovideoview">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -13,7 +15,8 @@
         <activity
             android:name=".activity.PickPhotoPreviewActivity"
             android:label="@string/title_activity_pick_photo_preview"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".activity.PickVideoPreviewActivity"></activity>
     </application>
 
 </manifest>

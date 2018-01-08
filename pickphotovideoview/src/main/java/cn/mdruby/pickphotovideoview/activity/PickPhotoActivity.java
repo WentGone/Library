@@ -145,7 +145,10 @@ public class PickPhotoActivity extends AppCompatActivity implements OnItemPhotoC
 
     @Override
     public void onVideoClick(int position) {
-
+        MediaModel mediaModel = mDatas.get(position);
+        Intent intent = new Intent(this,PickVideoPreviewActivity.class);
+        intent.putExtra(PickVideoPreviewActivity.MEDIA_BEAN,mediaModel);
+        startActivity(intent);
     }
 
     @Override

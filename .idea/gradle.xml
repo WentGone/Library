@@ -11,6 +11,8 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/baselibrary" />
             <option value="$PROJECT_DIR$/cameravideolibrary" />
+            <option value="$PROJECT_DIR$/giraffeplayer" />
+            <option value="$PROJECT_DIR$/ijkplayer-java" />
             <option value="$PROJECT_DIR$/pickphotovideoview" />
           </set>
         </option>
