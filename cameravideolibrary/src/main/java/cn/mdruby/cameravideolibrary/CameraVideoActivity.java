@@ -239,7 +239,7 @@ public class CameraVideoActivity extends AppCompatActivity implements SurfaceHol
                     }
                 }
             }
-        },1000);
+        },500);
     }
 
     protected void startVideo() {
@@ -358,6 +358,12 @@ public class CameraVideoActivity extends AppCompatActivity implements SurfaceHol
         options.transform(new CircleCrop());
         Glide.with(context).load(file.getAbsolutePath())
                 .apply(options).into(mIVShowPhoto);
+        Intent intent = new Intent();
+        intent.putExtra(AppConstant.KEY.IMG_PATH, file.getAbsolutePath());
+        intent.putExtra(AppConstant.KEY.PIC_WIDTH, screenWidth);
+        intent.putExtra(AppConstant.KEY.PIC_HEIGHT, picHeight);
+        setResult(RESULT_OK,intent);
+        CameraVideoActivity.this.finish();
     }
 
     /**

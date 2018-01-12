@@ -56,7 +56,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/img_homepage_camera5"
                 android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"/>
+                android:layout_alignParentRight="true"
+                android:visibility="gone"/>
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

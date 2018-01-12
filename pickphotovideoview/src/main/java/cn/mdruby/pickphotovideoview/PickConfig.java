@@ -47,10 +47,25 @@ public class PickConfig {
 
     public static final String MEIDA_PREVIEW_MODEL = "intent_pre_view_model";
 
-    public static class RrquestCode{
+    public static class RequestCode {
         /**
          * 拍照(自定义相机)
          */
         public static final int TAKE_PHOTO_BY_SELF = 0x6756;
+
+        /**
+         * 选择照片
+         */
+        public static final int SELECT_PHOTO = 0x672;
+
+        /**
+         * 预览图片
+         */
+        public static final int PRE_PHOTO_CODE = 0x786;
+    }
+
+    public static class KEY{
+        public static final String MEDIA_FILE_DATA = "media_file_data";
+        public static final String PRE_PHOTO_FILE = "PRE_photo_file";
     }
 }

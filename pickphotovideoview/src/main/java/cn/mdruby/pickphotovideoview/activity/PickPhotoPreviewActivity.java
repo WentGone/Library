@@ -1,5 +1,6 @@
 package cn.mdruby.pickphotovideoview.activity;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -22,9 +23,12 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.Serializable;
 import java.util.List;
 
 import cn.mdruby.pickphotovideoview.MediaModel;
+import cn.mdruby.pickphotovideoview.PickConfig;
+import cn.mdruby.pickphotovideoview.PickPhotoView;
 import cn.mdruby.pickphotovideoview.R;
 
 public class PickPhotoPreviewActivity extends AppCompatActivity{
@@ -34,6 +38,7 @@ public class PickPhotoPreviewActivity extends AppCompatActivity{
     private ViewPager mViewPager;
     private static List<MediaModel> mediaModels;
     private int position = 0;
+    private static ImageView mIVselected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +46,8 @@ public class PickPhotoPreviewActivity extends AppCompatActivity{
         setContentView(R.layout.activity_pick_photo_preview);
         mediaModels = (List<MediaModel>) getIntent().getSerializableExtra(MEDIA_DATAS);
         position = getIntent().getIntExtra(POSITION_COUNT,0);
-//        Toast.makeText(this, "="+mediaModels.size(), Toast.LENGTH_SHORT).show();
 
+        mIVselected = (ImageView) findViewById(R.id.act_pick_photo_preview_IV_selected);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("");
@@ -54,6 +59,33 @@ public class PickPhotoPreviewActivity extends AppCompatActivity{
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setCurrentItem(position);
+        mIVselected.setImageResource(mediaModels.get(position).isSelected()?R.mipmap.pick_ic_select:R.mipmap.pick_ic_un_select);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                MediaModel mediaModel = mediaModels.get(position);
+                mIVselected.setImageResource(mediaModel.isSelected()?R.mipmap.pick_ic_select:R.mipmap.pick_ic_un_select);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        mIVselected.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int currentItem = mViewPager.getCurrentItem();
+                mediaModels.get(currentItem).setSelected(!mediaModels.get(currentItem).isSelected());
+                mIVselected.setImageResource(mediaModels.get(currentItem).isSelected()?R.mipmap.pick_ic_select:R.mipmap.pick_ic_select);
+            }
+        });
     }
 
     @Override
@@ -61,10 +93,21 @@ public class PickPhotoPreviewActivity extends AppCompatActivity{
         switch (item.getItemId()) {
             //重写ToolBar返回按钮的行为，防止重新打开父Activity重走生命周期方法
             case android.R.id.home:
+                Intent intent = getIntent();
+                intent.putExtra(PickConfig.KEY.PRE_PHOTO_FILE, (Serializable) mediaModels);
+                setResult(RESULT_OK,intent);
                 finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = getIntent();
+        intent.putExtra(PickConfig.KEY.PRE_PHOTO_FILE, (Serializable) mediaModels);
+        setResult(RESULT_OK,intent);
+        super.onBackPressed();
     }
 
     public static class PlaceholderFragment extends Fragment {
@@ -87,6 +130,7 @@ public class PickPhotoPreviewActivity extends AppCompatActivity{
             View rootView = inflater.inflate(R.layout.fragment_pick_photo_preview, container, false);
             ImageView iv = rootView.findViewById(R.id.frag_pick_photo_preview);
             Glide.with(getActivity()).load(mediaModels.get(getArguments().getInt(ARG_SECTION_NUMBER)).getPath()).into(iv);
+//            PickPhotoPreviewActivity.mIVselected.setImageResource(mediaModels.get(getArguments().getInt(ARG_SECTION_NUMBER)).isSelected()?R.mipmap.pick_ic_select:R.mipmap.pick_ic_un_select);
             return rootView;
         }
     }

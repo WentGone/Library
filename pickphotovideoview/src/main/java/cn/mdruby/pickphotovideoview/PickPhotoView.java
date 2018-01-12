@@ -22,7 +22,7 @@ public class PickPhotoView {
     private void startPickActivity(){
         Intent intent = new Intent(context,PickPhotoActivity.class);
         intent.putExtra(PickPhotoActivity.PICK_DATA,pickData);
-        ((Activity)context).startActivityForResult(intent,11);
+        ((Activity)context).startActivityForResult(intent,PickConfig.RequestCode.SELECT_PHOTO);
     }
 
 

@@ -10,4 +10,5 @@ public interface OnItemPhotoClickListener{
     void onCameraClick();
     void onPhotoClick(int position);
     void onVideoClick(int position);
+    void onSelectClick(int position);
 }

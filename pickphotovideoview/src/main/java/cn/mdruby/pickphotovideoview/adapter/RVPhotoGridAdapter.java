@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -39,7 +40,7 @@ public class RVPhotoGridAdapter extends RecyclerView.Adapter {
             if (position == 0){
                 return CAMERA_VIEW_TYPE;
             }else {
-                if (mDatas.get(position).getMimeType().contains("video")){
+                if (mDatas.get(position-1).getMimeType().contains("video")){
                     return VIDEO_VIEW_TYPE;
                 }else {
                     return PHOTO_VIEW_TYPE;
@@ -88,6 +89,10 @@ public class RVPhotoGridAdapter extends RecyclerView.Adapter {
 //        return 10;
     }
 
+    public MediaModel getItem(int position){
+        return mDatas.get(position);
+    }
+
     private class RVCameraViewHolder extends RecyclerView.ViewHolder{
         private View mViewRoot;
 
@@ -110,11 +115,12 @@ public class RVPhotoGridAdapter extends RecyclerView.Adapter {
 
 
     private class RVPhotoGridViewHolder extends RecyclerView.ViewHolder{
-        private ImageView mIV;
+        private ImageView mIV,mIVselected;
 
         public RVPhotoGridViewHolder(View itemView) {
             super(itemView);
             mIV = itemView.findViewById(R.id.item_photo_grid_layout_IV);
+            mIVselected = itemView.findViewById(R.id.item_photo_grid_layout_IV_selected);
         }
 
         private void bindView(final int position){
@@ -128,14 +134,30 @@ public class RVPhotoGridAdapter extends RecyclerView.Adapter {
                     }
                 }
             });
+            mIVselected.setImageResource(bean.isSelected()?R.mipmap.pick_ic_select:R.mipmap.pick_ic_un_select);
+
+            mIVselected.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onItemPhotoClickListener != null){
+                        onItemPhotoClickListener.onSelectClick(showCamera?position - 1 : position);
+                    }
+                }
+            });
         }
     }
     private class RVVideoGridViewHolder extends RecyclerView.ViewHolder{
         private ImageView mIV;
+        private TextView mtv;
+        private View mViewRoot;
+        private ImageView mIVselected;
 
         public RVVideoGridViewHolder(View itemView) {
             super(itemView);
             mIV = itemView.findViewById(R.id.item_photo_grid_layout_IV);
+            mViewRoot = itemView.findViewById(R.id.item_video_grid_layout_Root);
+            mtv = itemView.findViewById(R.id.item_video_grid_layout_TV);
+            mIVselected = itemView.findViewById(R.id.item_video_grid_layout_IV_selected);
         }
 
         private void bindView(final int position){
@@ -145,7 +167,17 @@ public class RVPhotoGridAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     if (onItemPhotoClickListener != null){
-                        onItemPhotoClickListener.onVideoClick(position);
+                        onItemPhotoClickListener.onVideoClick(showCamera ? position - 1 : position);
+                    }
+                }
+            });
+            mtv.setText(bean.getDurationStr());
+            mIVselected.setImageResource(bean.isSelected()?R.mipmap.pick_ic_select:R.mipmap.pick_ic_un_select);
+            mIVselected.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onItemPhotoClickListener != null){
+                        onItemPhotoClickListener.onSelectClick(showCamera ? position - 1 : position);
                     }
                 }
             });

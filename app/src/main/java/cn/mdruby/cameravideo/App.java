@@ -1,7 +1,10 @@
 package cn.mdruby.cameravideo;
 
 import android.app.Application;
+import android.database.sqlite.SQLiteDatabase;
 
+import com.afa.tourism.greendao.gen.DaoMaster;
+import com.afa.tourism.greendao.gen.DaoSession;
 import com.igexin.sdk.PushManager;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cookie.CookieJarImpl;
@@ -19,14 +22,27 @@ import okhttp3.OkHttpClient;
  */
 
 public class App extends Application {
+    private DaoMaster.DevOpenHelper mHelper;
+    private SQLiteDatabase db;
+    private DaoMaster mDaoMaster;
+    private DaoSession mDaoSession;
+
+    private static App app;
+
+    public static App getContext(){
+        return app;
+    }
+
     @Override
     public void onCreate() {
+        app = this;
         super.onCreate();
 
         PushManager.getInstance().initialize(this.getApplicationContext(), DemoPushService.class);
         PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), DemoIntentService.class);
 
         initOkGo();
+        setDatabase();
     }
 
     /**
@@ -58,5 +74,30 @@ public class App extends Application {
         OkGo.getInstance().init(this)                       //必须调用初始化
                 .setOkHttpClient(builder.build())               //建议设置OkHttpClient，不设置将使用默认的
                 .setRetryCount(3);                          //超时重试次数
+    }
+
+    /**     * 设置greenDao     */
+
+    private void setDatabase() {
+
+        // 通过DaoMaster 的内部类 DevOpenHelper，你可以得到一个便利的SQLiteOpenHelper 对象。
+        // 可能你已经注意到了，你并不需要去编写「CREATE TABLE」这样的 SQL 语句，因为greenDAO 已经帮你做了。
+        // 注意：默认的DaoMaster.DevOpenHelper 会在数据库升级时，删除所有的表，意味着这将导致数据的丢失。
+        // 所以，在正式的项目中，你还应该做一层封装，来实现数据库的安全升级。
+        mHelper = new DaoMaster.DevOpenHelper(this,"notes-db", null);
+        db =mHelper.getWritableDatabase();
+        // 注意：该数据库连接属于DaoMaster，所以多个 Session 指的是相同的数据库连接。
+        mDaoMaster = new DaoMaster(db);
+        mDaoSession = mDaoMaster.newSession();
+
+    }
+
+    public DaoSession getDaoSession() {
+        return mDaoSession;
+    }
+
+
+    public SQLiteDatabase getDb() {
+        return db;
     }
 }

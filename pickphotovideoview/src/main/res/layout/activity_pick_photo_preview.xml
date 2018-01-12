@@ -20,6 +20,13 @@
             android:layout_height="?attr/actionBarSize"
             android:background="#333"
             app:title="">
+            <ImageView
+                android:id="@+id/act_pick_photo_preview_IV_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:src="@mipmap/pick_ic_un_select"
+                android:layout_margin="10dp"/>
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
