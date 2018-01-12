@@ -1,0 +1,28 @@
+[
+    {
+        "outputFile": "D:\\Development\\Project\\Went_Gone\\Git\\Library\\giraffeplayer\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 6,
+                    "endColumn": 13,
+                    "endOffset": 327
+                },
+                "from": {
+                    "file": "C:\\Users\\asmin\\.android\\build-cache\\8e20274781fd30cb199148b4e244164ac405270e\\output\\res\\values-hdpi\\values-hdpi.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 293,
+                        "endLine": 8,
+                        "endColumn": 13,
+                        "endOffset": 565
+                    }
+                }
+            }
+        ]
+    }
+]
