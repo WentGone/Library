@@ -56,5 +56,5 @@ dependencies {
     compile project(':videocache')
     compile 'org.greenrobot:greendao:3.2.0'
     debugCompile 'com.amitshekhar.android:debug-db:1.0.0'
-//    compile 'com.github.WentGone:Library:1.0.2'
+//    compile 'com.github.WentGone:Library:1.0.4'
 }
